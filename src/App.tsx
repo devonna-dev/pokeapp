@@ -14,7 +14,8 @@ export const App = () => {
     name: '',
     height: '',
     weight: '',
-    type: ''
+    type: '',
+    image: ''
   });
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,7 +32,8 @@ export const App = () => {
       name: pokeJson.name,
       height: pokeJson.height,
       weight: pokeJson.weight,
-      type: pokeType
+      type: pokeType,
+      image: pokeJson.sprites.front_default
     };
     setPokeObject(pokeObject);
   }
@@ -49,7 +51,7 @@ export const App = () => {
     <ChakraProvider theme={theme}>
       <div className='app-container'>
         <PokeInput pokemon={pokemon} search={searchForPokemon} onChange={onChange} />
-        <PokeCard name={pokeObject.name} weight={pokeObject.weight} height={pokeObject.height} type={pokeObject.type} />
+        <PokeCard name={pokeObject.name} weight={pokeObject.weight} height={pokeObject.height} type={pokeObject.type} image={pokeObject.image} />
       </div>
     </ChakraProvider>
   )

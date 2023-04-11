@@ -24,8 +24,8 @@ export const PokeCard = (props: PokeCardProps) => {
                     </div>
                     <div className='fields'>
                         <Text>{type}</Text>
-                        <Text>{weight}</Text>
-                        <Text>{height}</Text>
+                        <Text>{weight} lbs</Text>
+                        <Text>{height} feet</Text>
                     </div>
                 </CardBody>
             </Card>

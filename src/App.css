@@ -1,0 +1,21 @@
+.pokecard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 500px;
+}
+
+.field-names {
+  display: inline-block;
+}
+
+.fields {
+  display: inline-block;
+  margin-left: 5rem;
+}
+
+.poke-search-bar {
+  margin: 0 auto;
+  margin-top: 5rem;
+  width: 50%;
+}

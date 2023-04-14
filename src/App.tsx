@@ -14,9 +14,10 @@ export const App = () => {
     name: '',
     height: '',
     weight: '',
-    type: '',
     image: ''
   });
+
+  const [pokeTypeArray, setPokeTypeArray] = useState(['']);
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPokemon(event.target.value)
@@ -27,15 +28,25 @@ export const App = () => {
     const searchedPoke = await fetch(`https://pokeapi.co/api/v2/pokemon/${normalizedPokemon}`)
     const pokeJson = await searchedPoke.json()
     console.log(pokeJson)
-    const pokeType = pokeJson.types[0].type.name // ToDo: Handle pokemon with more than one type
+    let pokeTypeArray: string[] = [];
+
+    if (pokeJson.types.length > 1) {
+      const typeArray = pokeJson.types
+      typeArray.forEach((arrayItem: any) => { //find right type here for arrayItem
+        pokeTypeArray = [...pokeTypeArray, arrayItem.type.name]
+      })
+    } else {
+      pokeTypeArray = [pokeJson.types[0].type.name]
+    }
+
     const pokeObject = {
       name: pokeJson.name,
       height: pokeJson.height,
       weight: pokeJson.weight,
-      type: pokeType,
       image: pokeJson.sprites.front_default
     };
     setPokeObject(pokeObject);
+    setPokeTypeArray(pokeTypeArray);
   }
 
   const searchForPokemon = () => {
@@ -51,7 +62,7 @@ export const App = () => {
     <ChakraProvider theme={theme}>
       <div className='app-container'>
         <PokeInput pokemon={pokemon} search={searchForPokemon} onChange={onChange} />
-        <PokeCard name={pokeObject.name} weight={pokeObject.weight} height={pokeObject.height} type={pokeObject.type} image={pokeObject.image} />
+        <PokeCard name={pokeObject.name} weight={pokeObject.weight} height={pokeObject.height} type={pokeTypeArray} image={pokeObject.image} />
       </div>
     </ChakraProvider>
   )

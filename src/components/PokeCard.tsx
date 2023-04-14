@@ -2,7 +2,7 @@ import { Card, CardHeader, CardBody, CardFooter, Text, Image } from '@chakra-ui/
 
 interface PokeCardProps {
     name: string;
-    type: string;
+    type: string[];
     image: string;
     weight: string;
     height: string;
@@ -10,6 +10,14 @@ interface PokeCardProps {
 
 export const PokeCard = (props: PokeCardProps) => {
     const { name, type, weight, height, image } = props;
+
+    let formattedType = '';
+
+    if (type.length > 1) {
+        formattedType = type.join(", ")
+    } else {
+        formattedType = type[0]
+    }
 
     return (
         <div className='pokecard'>
@@ -23,7 +31,7 @@ export const PokeCard = (props: PokeCardProps) => {
                         <Text>height:</Text>
                     </div>
                     <div className='fields'>
-                        <Text>{type}</Text>
+                        <Text>{formattedType}</Text>
                         <Text>{weight} lbs</Text>
                         <Text>{height} feet</Text>
                     </div>
